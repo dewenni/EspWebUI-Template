@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<!--SECTION-START-->
+<div id="tab11" class="tab-content">
+  <!-- OTA-update -->
+  <div class="grid">
+    <article class="tools">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="ota"></div>
+        <div class="dash-content">
+          <form
+            method="POST"
+            action="#"
+            enctype="multipart/form-data"
+            id="ota_upload_form">
+            <button
+              id="p11_check_git_btn"
+              class="svgbtn2 i_github"
+              data-i18n="check_github"></button>
+            <br />
+            <input
+              type="file"
+              name="ota_update"
+              id="ota_file_input"
+              onchange="ota_sub_fun(this)"
+              accept=".bin" />
+            <input
+              type="submit"
+              id="ota_update_btn"
+              disabled="disabled"
+              value="Update" />
+            <br />
+            <div
+              id="ota_status_txt"
+              style="display: none; text-align: left"
+              data-i18n="update_ready">
+              --
+            </div>
+            <br /><progress
+              id="ota_progress_bar"
+              style="display: none"
+              max="100"
+              value="0"></progress>
+          </form>
+        </div>
+      </div>
+    </article>
+    <!-- Dialog OPEN-CONFIG -->
+    <dialog id="open_config_dialog">
+      <article>
+        <header><strong>config.json</strong></header>
+        <pre id="config_output"></pre>
+        <div class="dash-footer">
+          <button
+            id="p11_config_dialog_btn"
+            data-i18n="close"
+            style="width: 75%"></button>
+        </div>
+      </article>
+    </dialog>
+    <!-- config import/export -->
+    <article class="tools">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="config_mgn"></div>
+        <div class="dash-content">
+          <form
+            method="POST"
+            action="#"
+            enctype="multipart/form-data"
+            id="file_upload_form">
+            <input
+              type="file"
+              name="file_update"
+              id="file_input"
+              accept=".json"
+              onchange="file_sub_fun(this)" />
+            <div
+              id="upload_status_txt"
+              style="display: none; text-align: left"
+              data-i18n="import_ready">
+              --
+            </div>
+            <button
+              style="width: 100%"
+              type="submit"
+              id="file_upload_btn"
+              data-i18n="import"
+              disabled="true"></button>
+            <button
+              style="width: 100%"
+              id="p11_export_btn"
+              data-i18n="export"
+              onclick="exportConfig()"></button>
+            <button
+              style="width: 100%; margin-top: 17px"
+              id="p11_file_show_btn"
+              data-i18n="open"></button>
+          </form>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+<!--SECTION-END-->

@@ -1,0 +1,103 @@
+<!--SECTION-START-->
+
+<!-- Tab-2 -->
+<div id="tab2" class="tab-content">
+  <!-- Grid-Row-1 -->
+  <div class="grid">
+    <!-- Control Example -->
+    <article class="dash" style="height: 120px">
+      <div class="dash-main">
+        <div class="dash-header" id="p01_control_name_1">control 1</div>
+        <div class="dash-content">
+          <button id="p01_up_0" class="svgbtn i_up"></button>
+          <button id="p01_stop_0" class="svgbtn i_stop"></button>
+          <button id="p01_down_0" class="svgbtn i_down"></button>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-1 -->
+
+  <!-- START Grid-Row-2 -->
+  <div class="grid">
+    <!-- Opmode Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="opmode"></div>
+        <div class="dash-content">
+          <fieldset class="radio-buttons">
+            <input
+              class="button-like"
+              type="radio"
+              id="p02_opmode_man"
+              name="opmode" />
+            <label
+              class="button-like-label"
+              for="p02_opmode_man"
+              data-i18n="manual"></label>
+            <input
+              class="button-like"
+              type="radio"
+              id="p02_opmode_auto"
+              name="opmode" />
+            <label
+              class="button-like-label"
+              for="p02_opmode_auto"
+              data-i18n="auto"></label>
+          </fieldset>
+        </div>
+      </div>
+    </article>
+
+    <!-- Dropdown Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="option"></div>
+        <div class="dash-content">
+          <select name="p02_option" id="p02_option">
+            <option value="0" data-i18n="option_1"></option>
+            <option value="1" data-i18n="option_2"></option>
+            <option value="2" data-i18n="option_3"></option>
+          </select>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-2 -->
+
+  <!-- START Grid-Row-3 -->
+  <div class="grid">
+    <!-- Input Number Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="input"></div>
+        <div class="dash-content">
+          <input type="number" id="p02_number_1" />
+        </div>
+      </div>
+    </article>
+
+    <!-- Range Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="range"></div>
+        <div class="dash-content" role="group">
+          <input
+            type="range"
+            class="rangeSlider"
+            data-value-id="p02_range_1_txt"
+            id="p02_range_1_value"
+            min="0"
+            max="100"
+            value="50" />
+          <span
+            style="padding-left: 20px; padding-right: 20px"
+            id="p02_range_1_txt"></span>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-3 -->
+</div>
+<!-- END Tab-Content -->
+<!--SECTION-END-->

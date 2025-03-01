@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>EspWebUI</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+    <link rel="stylesheet" type="text/css" href="lib.css" />
+    <link rel="stylesheet" type="text/css" href="user.css" />
+    <script defer src="lib.js" defer></script>
+    <script defer src="user.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- Dialog Version -->
+    <dialog id="version_dialog">
+      <article class="dash">
+        <div class="dash-main">
+          <div class="dash-header" data-i18n="version_info"></div>
+          <br />
+          <div class="leftright">
+            <span data-i18n="act_version"></span>
+            <span id="p00_dialog_version"></span>
+          </div>
+          <div class="leftright">
+            <span data-i18n="github_version"></span>
+            <a id="p00_dialog_git_version" aria-busy="true"></a>
+          </div>
+          <br />
+          <div
+            id="p00_update_btn_hide"
+            class="dash-footer"
+            style="display: none">
+            <button
+              id="p00_update_btn"
+              style="width: 75%"
+              aria-busy="false"></button>
+          </div>
+          <div class="dash-footer">
+            <button
+              id="close_version_Dialog_btn"
+              data-i18n="close"
+              style="width: 75%"></button>
+          </div>
+        </div>
+        <div class="dash-icon">
+          <div class="svg i_github"></div>
+        </div>
+      </article>
+    </dialog>
+    <!-- Dialog OTA-FAILED -->
+    <dialog id="ota_update_failed_dialog">
+      <article class="dash">
+        <div class="dash-main">
+          <div class="dash-header" data-i18n="update_failed"></div>
+          <div style="text-align: center">
+            <span data-i18n="error_text"></span>
+            <span id="p00_ota_upd_err"></span>
+          </div>
+          <div class="dash-content">
+            <p data-i18n="update_error_info"></p>
+          </div>
+          <div class="dash-footer">
+            <button
+              id="p00_ota_failed_btn"
+              data-i18n="ok"
+              style="width: 75%"></button>
+          </div>
+        </div>
+        <div class="dash-icon">
+          <div class="svg i_alarm"></div>
+        </div>
+      </article>
+    </dialog>
+    <!-- Dialog OTA-Done -->
+    <dialog id="ota_update_done_dialog">
+      <article class="dash">
+        <div class="dash-main">
+          <div class="dash-header" data-i18n="update_done"></div>
+          <div class="dash-content">
+            <p data-i18n="update_info"></p>
+          </div>
+          <div class="dash-footer">
+            <button
+              id="p00_ota_confirm_btn"
+              data-i18n="restart"
+              style="width: 75%"></button>
+          </div>
+        </div>
+        <div class="dash-icon">
+          <div class="svg i_update_done"></div>
+        </div>
+      </article>
+    </dialog>
+    <!--TOP-MENU-->
+    <nav>
+      <div class="topMenu">
+        <ul>
+          <li>
+            <strong style="margin-right: 10px">EspWebUI</strong>
+            <span class="simModeBar">SIM</span>
+            <span class="setupModeBar">SETUP</span>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <details class="dropdown">
+              <summary id="topMenuDropdown" class="i_menu"></summary>
+              <ul class="nav-list" dir="rtl">
+                <li><a data-tab="tab1" href="#" data-i18n="dashboard"></a></li>
+                <li><a data-tab="tab2" href="#" data-i18n="control"></a></li>
+                <li><a data-tab="tab3" href="#" data-i18n="table"></a></li>
+                <li>
+                  <a data-tab="tab9" href="#" data-i18n="system"></a>
+                </li>
+                <li>
+                  <a data-tab="tab10" href="#" data-i18n="logger"></a>
+                </li>
+                <li>
+                  <a data-tab="tab11" href="#" data-i18n="tools"></a>
+                </li>
+                <li>
+                  <a data-tab="tab12" href="#" data-i18n="settings"></a>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--TOP-MENU-END-->
+    <!--SIDEBAR-->
+    <div class="sidebar">
+      <div>
+        <div>EspWebUI</div>
+      </div>
+      <div class="simModeBar">SIMULATION-MODE</div>
+      <div class="setupModeBar">SETUP-MODE</div>
+      <ul class="nav-list">
+        <li>
+          <a href="#" data-tab="tab1" class="active">
+            <i class="svg i_dashboard"></i>
+            <span class="links_name" data-i18n="dashboard"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-tab="tab2">
+            <i class="svg i_control"></i>
+            <span class="links_name" data-i18n="control"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-tab="tab3">
+            <i class="svg i_table"></i>
+            <span class="links_name" data-i18n="table"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-tab="tab9">
+            <i class="svg i_info"></i>
+            <span class="links_name" data-i18n="system"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-tab="tab10">
+            <i class="svg i_log"></i>
+            <span class="links_name" data-i18n="logger"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-tab="tab11">
+            <i class="svg i_upload"></i>
+            <span class="links_name" data-i18n="tools"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-tab="tab12">
+            <i class="svg i_settings"></i>
+            <span class="links_name" data-i18n="settings"></span>
+          </a>
+        </li>
+      </ul>
+      <div style="display: inline-flex; margin-top: auto; margin-bottom: 5px">
+        <a id="p00_version" style="margin-right: auto; margin-top: auto"></a>
+        <i id="p00_wifi_icon" style="width: 28px; height: 28px"></i>
+        <i id="p00_eth_icon" style="width: 28px; height: 28px"></i>
+        <a
+          href="/logout"
+          class="svg i_logout OPT_AUTH"
+          style="width: 28px; height: 28px"></a>
+      </div>
+    </div>
+    <!--Sidebar-END-->
+    <section class="home-section">
+      <main class="container-fluid">
+<!-- Tab-1 -->
+<div id="tab1" class="tab-content active">
+  <!-- Grid-Row-1 -->
+  <div class="grid">
+    <!-- Operation Mode Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="$opmode"></div>
+        <div class="dash-content">
+          <div class="value" id="p01_opmode">---</div>
+        </div>
+      </div>
+      <div class="dash-icon">
+        <i id="p01_opmode_icon"></i>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-1 -->
+
+  <!-- START Grid-Row-2 -->
+  <div class="grid">
+    <!-- Single Value Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="temp"></div>
+        <div class="dash-content">
+          <div class="value" id="p01_temp1">0.0</div>
+        </div>
+      </div>
+      <div class="dash-icon">
+        <i class="svg i_temp"></i>
+      </div>
+    </article>
+
+    <!-- Double Value Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="temp"></div>
+        <div class="dash-content">
+          <div class="value" id="p01_temp_set">0.0</div>
+          <div class="value" id="p01_temp_act">0.0</div>
+        </div>
+        <div class="dash-footer">
+          <div data-i18n="set_temp_c"></div>
+          <div data-i18n="act_temp_c"></div>
+        </div>
+      </div>
+      <div class="dash-icon">
+        <i class="svg i_temp"></i>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-2 -->
+</div>
+<!-- END Tab-Content -->
+<!-- Tab-2 -->
+<div id="tab2" class="tab-content">
+  <!-- Grid-Row-1 -->
+  <div class="grid">
+    <!-- Control Example -->
+    <article class="dash" style="height: 120px">
+      <div class="dash-main">
+        <div class="dash-header" id="p01_control_name_1">control 1</div>
+        <div class="dash-content">
+          <button id="p01_up_0" class="svgbtn i_up"></button>
+          <button id="p01_stop_0" class="svgbtn i_stop"></button>
+          <button id="p01_down_0" class="svgbtn i_down"></button>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-1 -->
+
+  <!-- START Grid-Row-2 -->
+  <div class="grid">
+    <!-- Opmode Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="opmode"></div>
+        <div class="dash-content">
+          <fieldset class="radio-buttons">
+            <input
+              class="button-like"
+              type="radio"
+              id="p02_opmode_man"
+              name="opmode" />
+            <label
+              class="button-like-label"
+              for="p02_opmode_man"
+              data-i18n="manual"></label>
+            <input
+              class="button-like"
+              type="radio"
+              id="p02_opmode_auto"
+              name="opmode" />
+            <label
+              class="button-like-label"
+              for="p02_opmode_auto"
+              data-i18n="auto"></label>
+          </fieldset>
+        </div>
+      </div>
+    </article>
+
+    <!-- Dropdown Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="option"></div>
+        <div class="dash-content">
+          <select name="p02_option" id="p02_option">
+            <option value="0" data-i18n="option_1"></option>
+            <option value="1" data-i18n="option_2"></option>
+            <option value="2" data-i18n="option_3"></option>
+          </select>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-2 -->
+
+  <!-- START Grid-Row-3 -->
+  <div class="grid">
+    <!-- Input Number Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="input"></div>
+        <div class="dash-content">
+          <input type="number" id="p02_number_1" />
+        </div>
+      </div>
+    </article>
+
+    <!-- Range Example -->
+    <article class="dash">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="range"></div>
+        <div class="dash-content" role="group">
+          <input
+            type="range"
+            class="rangeSlider"
+            data-value-id="p02_range_1_txt"
+            id="p02_range_1_value"
+            min="0"
+            max="100"
+            value="50" />
+          <span
+            style="padding-left: 20px; padding-right: 20px"
+            id="p02_range_1_txt"></span>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- END Grid-Row-3 -->
+</div>
+<!-- END Tab-Content -->
+<div id="tab3" class="tab-content">
+  <!-- Grid 1 -->
+  <div class="grid">
+    <!-- Table 1 -->
+    <article class="card">
+      <p class="table-header" data-i18n="table++ 1"></p>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="example++ 1"></td>
+            <td id="p03_tab1_val1" class="table-value"></td>
+            <td>°C</td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 2"></td>
+            <td id="p03_tab1_val2" class="table-value"></td>
+            <td>L</td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 3"></td>
+            <td id="p03_tab1_val3" class="table-value"></td>
+            <td>%</td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 4"></td>
+            <td id="p03_tab1_val4" class="table-value"></td>
+            <td>s</td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 5"></td>
+            <td id="p03_tab1_val5" class="table-value"></td>
+            <td>min</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+    <!-- Table 2 -->
+    <article class="card">
+      <p class="table-header" data-i18n="table++ 2"></p>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="example++ 1"></td>
+            <td id="p03_tab2_val1" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 2"></td>
+            <td id="p03_tab2_val2" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 3"></td>
+            <td id="p03_tab2_val3" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 4"></td>
+            <td id="p03_tab2_val4" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="example++ 5"></td>
+            <td id="p03_tab2_val5" class="table-value"></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </div>
+  <!-- END Grid 1 -->
+</div>
+<div id="tab9" class="tab-content">
+  <div class="grid">
+    <!-- Grid 1 -->
+    <article class="card">
+      <p class="table-header" data-i18n="network_info"></p>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="wifi_ip"></td>
+            <td id="p09_wifi_ip" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="wifi_signal"></td>
+            <td id="p09_wifi_signal" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="wifi_rssi"></td>
+            <td id="p09_wifi_rssi" class="table-value"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="eth_ip"></td>
+            <td id="p09_eth_ip" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="eth_status"></td>
+            <td id="p09_eth_status" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="eth_link_speed"></td>
+            <td id="p09_eth_link_speed" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="eth_full_duplex"></td>
+            <td id="p09_eth_full_duplex" class="table-value"></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
+    <article class="card">
+      <p class="table-header" data-i18n="mqtt_info"></p>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="state"></td>
+            <td id="p09_mqtt_status" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="connection"></td>
+            <td id="p09_mqtt_connection" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="last_error"></td>
+            <td id="p09_mqtt_last_err" class="table-value"></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </div>
+  <!-- END Grid 1 -->
+
+  <div class="grid">
+    <!-- Grid 2 -->
+    <article class="card">
+      <p class="table-header" data-i18n="sysinfo"></p>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="sw_version"></td>
+            <td id="p09_sw_version" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="date"></td>
+            <td id="p09_sw_date" class="table-value"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="lifetime"></td>
+            <td id="p09_uptime" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="restart_reason"></td>
+            <td id="p09_restart_reason" class="table-value"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="esp_flash_usage"></td>
+            <td id="p09_esp_flash_usage" class="table-value"></td>
+            <td>%</td>
+          </tr>
+          <tr>
+            <td data-i18n="esp_heap_usage"></td>
+            <td id="p09_esp_heap_usage" class="table-value"></td>
+            <td>%</td>
+          </tr>
+          <tr>
+            <td data-i18n="esp_maxallocheap"></td>
+            <td id="p09_esp_maxallocheap" class="table-value"></td>
+            <td>KB</td>
+          </tr>
+          <tr>
+            <td data-i18n="esp_minfreeheap"></td>
+            <td id="p09_esp_minfreeheap" class="table-value"></td>
+            <td>KB</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
+    <article class="card">
+      <p class="table-header" data-i18n="time_info"></p>
+      <table class="striped">
+        <tbody>
+          <tr>
+            <td data-i18n="date"></td>
+            <td id="p09_act_date" class="table-value"></td>
+          </tr>
+          <tr>
+            <td data-i18n="time"></td>
+            <td id="p09_act_time" class="table-value"></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </div>
+  <!-- END Grid 2 -->
+</div>
+<!-- Logger-Inhalt hier -->
+<div id="tab10" class="tab-content">
+  <div class="grid">
+    <!-- Grid 1 -->
+    <article style="width: 100%">
+      <div class="dash-content" style="margin-bottom: 0px; flex-wrap: wrap">
+        <button id="p10_log_clr_btn" data-i18n="clear"></button>
+        <button id="p10_log_refresh_btn" data-i18n="refresh"></button>
+        <select id="cfg_logger_level" style="max-width: 390px; margin: 0px">
+          <option value="1" data-i18n="log_mode_1"></option>
+          <option value="2" data-i18n="log_mode_2"></option>
+          <option value="3" data-i18n="log_mode_3"></option>
+          <option value="4" data-i18n="log_mode_4"></option>
+        </select>
+        <select id="cfg_logger_order" style="max-width: 220px; margin: 0px">
+          <option value="0" data-i18n="sort_down"></option>
+          <option value="1" data-i18n="sort_up"></option>
+        </select>
+        <input
+          name="log_enable"
+          type="checkbox"
+          role="switch"
+          id="cfg_logger_enable" />
+      </div>
+      <hr />
+      <div
+        id="p10_log_output"
+        style="font-family: 'Consolas', monospace; font-size: medium"></div>
+    </article>
+  </div>
+</div>
+<div id="tab11" class="tab-content">
+  <!-- OTA-update -->
+  <div class="grid">
+    <article class="tools">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="ota"></div>
+        <div class="dash-content">
+          <form
+            method="POST"
+            action="#"
+            enctype="multipart/form-data"
+            id="ota_upload_form">
+            <button
+              id="p11_check_git_btn"
+              class="svgbtn2 i_github"
+              data-i18n="check_github"></button>
+            <br />
+            <input
+              type="file"
+              name="ota_update"
+              id="ota_file_input"
+              onchange="ota_sub_fun(this)"
+              accept=".bin" />
+            <input
+              type="submit"
+              id="ota_update_btn"
+              disabled="disabled"
+              value="Update" />
+            <br />
+            <div
+              id="ota_status_txt"
+              style="display: none; text-align: left"
+              data-i18n="update_ready">
+              --
+            </div>
+            <br /><progress
+              id="ota_progress_bar"
+              style="display: none"
+              max="100"
+              value="0"></progress>
+          </form>
+        </div>
+      </div>
+    </article>
+    <!-- Dialog OPEN-CONFIG -->
+    <dialog id="open_config_dialog">
+      <article>
+        <header><strong>config.json</strong></header>
+        <pre id="config_output"></pre>
+        <div class="dash-footer">
+          <button
+            id="p11_config_dialog_btn"
+            data-i18n="close"
+            style="width: 75%"></button>
+        </div>
+      </article>
+    </dialog>
+    <!-- config import/export -->
+    <article class="tools">
+      <div class="dash-main">
+        <div class="dash-header" data-i18n="config_mgn"></div>
+        <div class="dash-content">
+          <form
+            method="POST"
+            action="#"
+            enctype="multipart/form-data"
+            id="file_upload_form">
+            <input
+              type="file"
+              name="file_update"
+              id="file_input"
+              accept=".json"
+              onchange="file_sub_fun(this)" />
+            <div
+              id="upload_status_txt"
+              style="display: none; text-align: left"
+              data-i18n="import_ready">
+              --
+            </div>
+            <button
+              style="width: 100%"
+              type="submit"
+              id="file_upload_btn"
+              data-i18n="import"
+              disabled="true"></button>
+            <button
+              style="width: 100%"
+              id="p11_export_btn"
+              data-i18n="export"
+              onclick="exportConfig()"></button>
+            <button
+              style="width: 100%; margin-top: 17px"
+              id="p11_file_show_btn"
+              data-i18n="open"></button>
+          </form>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+<div id="tab12" class="tab-content">
+  <div class="grid" style="max-width: 1024px">
+    <div style="width: 100%">
+      <!-- WLAN -->
+      <details>
+        <summary data-i18n="wifi"></summary>
+        <div class="section-header">
+          <label for="wifi_enable" data-i18n="activate"></label>
+          <div class="switch-container">
+            <input
+              name="wifi_enable"
+              type="checkbox"
+              role="switch"
+              id="cfg_wifi_enable" />
+          </div>
+        </div>
+        <br />
+        <label for="wifi_hostname" data-i18n="hostname"></label>
+        <input type="text" id="cfg_wifi_hostname" name="wifi_hostname" />
+        <label for="wifi_ssid" data-i18n="ssid"></label>
+        <input type="text" id="cfg_wifi_ssid" name="wifi_ssid" />
+        <label for="wifi_password">Passwort</label>
+        <input type="password" id="cfg_wifi_password" name="wifi_password" />
+
+        <div class="section-header">
+          <label for="man_ip_enable" data-i18n="static_ip"></label>
+          <div class="switch-container">
+            <input
+              name="man_ip_enable"
+              type="checkbox"
+              role="switch"
+              hideOpt="WIFI_STATIC_IP"
+              id="cfg_wifi_static_ip" />
+          </div>
+        </div>
+        <br />
+        <div class="WIFI_STATIC_IP">
+          <label for="ip_adr" data-i18n="ip_adr"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_wifi_ipaddress"
+            name="ip_adr" />
+          <label for="ip_subnet" data-i18n="ip_subnet"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_wifi_subnet"
+            name="ip_subnet" />
+          <label for="ip_gateway" data-i18n="ip_gateway"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_wifi_gateway"
+            name="ip_gateway" />
+          <label for="ip_dns" data-i18n="ip_dns"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_wifi_dns"
+            name="ip_dns" />
+        </div>
+      </details>
+      <hr />
+      <!-- ETHERNET -->
+      <details>
+        <summary>Ethernet (W5500)</summary>
+        <div class="section-header">
+          <label for="eth_enable" data-i18n="activate"></label>
+          <div class="switch-container">
+            <input
+              name="eth_enable"
+              type="checkbox"
+              role="switch"
+              id="cfg_eth_enable" />
+          </div>
+        </div>
+        <br />
+        <label for="eth_hostname" data-i18n="hostname"></label>
+        <input type="text" id="cfg_eth_hostname" name="eth_hostname" />
+        <label for="eth_gpio_sck">GPIO CLK</label>
+        <input type="number" id="cfg_eth_gpio_sck" name="eth_gpio_sck" />
+        <label for="eth_gpio_mosi">GPIO MOSI</label>
+        <input type="number" id="cfg_eth_gpio_mosi" name="eth_gpio_mosi" />
+        <label for="eth_gpio_miso">GPIO MISO</label>
+        <input type="number" id="cfg_eth_gpio_miso" name="eth_gpio_miso" />
+        <label for="eth_gpio_cs">GPIO CS</label>
+        <input type="number" id="cfg_eth_gpio_cs" name="eth_gpio_cs" />
+        <label for="eth_gpio_irq">GPIO INT</label>
+        <input type="number" id="cfg_eth_gpio_irq" name="eth_gpio_irq" />
+        <label for="eth_gpio_rst">GPIO RST</label>
+        <input type="number" id="cfg_eth_gpio_rst" name="eth_gpio_rst" />
+        <div class="section-header">
+          <label for="man_ip_enable" data-i18n="static_ip"></label>
+          <div class="switch-container">
+            <input
+              name="man_ip_enable"
+              type="checkbox"
+              role="switch"
+              hideOpt="ETH_STATIC_IP"
+              id="cfg_eth_static_ip" />
+          </div>
+        </div>
+        <br />
+        <div class="ETH_STATIC_IP">
+          <label for="ip_adr" data-i18n="ip_adr"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_eth_ipaddress"
+            name="ip_adr" />
+          <label for="ip_subnet" data-i18n="ip_subnet"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_eth_subnet"
+            name="ip_subnet" />
+          <label for="ip_gateway" data-i18n="ip_gateway"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_eth_gateway"
+            name="ip_gateway" />
+          <label for="ip_dns" data-i18n="ip_dns"></label>
+          <input
+            type="url"
+            data-type="ip"
+            oninput="validateIP(this)"
+            id="cfg_eth_dns"
+            name="ip_dns" />
+        </div>
+      </details>
+      <hr />
+      <!-- Authentication -->
+      <details>
+        <summary data-i18n="access"></summary>
+        <div class="section-header">
+          <label for="auth_enable" data-i18n="activate"></label>
+          <div class="switch-container">
+            <input
+              name="auth_enable"
+              type="checkbox"
+              role="switch"
+              hideOpt="OPT_AUTH"
+              id="cfg_auth_enable" />
+          </div>
+        </div>
+        <br />
+        <label for="auth_user" data-i18n="user"></label>
+        <input type="text" id="cfg_auth_user" name="auth_user" />
+        <label for="auth_passw" data-i18n="password"></label>
+        <input type="password" id="cfg_auth_password" name="auth_passw" />
+      </details>
+      <hr />
+      <!-- NTP-Server -->
+      <details>
+        <summary data-i18n="ntp"></summary>
+        <div class="section-header">
+          <label for="ntp_enable" data-i18n="activate"></label>
+          <div class="switch-container">
+            <input
+              name="ntp_enable"
+              type="checkbox"
+              role="switch"
+              id="cfg_ntp_enable" />
+          </div>
+        </div>
+        <br />
+        <label for="ntp_server" data-i18n="server"></label>
+        <input type="text" id="cfg_ntp_server" name="ntp_server" />
+        <div class="leftright">
+          <label for="time_zone" data-i18n="ntp_tz"></label>
+          <button
+            id="p12_ntp_open_dialog_btn"
+            class="i_help"
+            style="
+              height: 20px;
+              background-color: transparent;
+              border: none;
+            "></button>
+        </div>
+        <input type="text" id="cfg_ntp_tz" name="time_zone" />
+      </details>
+      <!-- Dialog OPEN-NTP-HELP -->
+      <dialog id="p12_ntp_dialog">
+        <article>
+          <div id="p12_ntp_help_output"></div>
+          <div class="dash-footer">
+            <button
+              id="p12_ntp_close_dialog_btn"
+              data-i18n="close"
+              style="width: 75%"></button>
+          </div>
+        </article>
+      </dialog>
+      <hr />
+
+      <!-- MQTT -->
+      <details>
+        <summary data-i18n="mqtt"></summary>
+        <div class="section-header">
+          <label for="mqtt_enable" data-i18n="activate"></label>
+          <div class="switch-container">
+            <input
+              name="mqtt_enable"
+              type="checkbox"
+              role="switch"
+              id="cfg_mqtt_enable" />
+          </div>
+        </div>
+        <div class="section-header">
+          <label for="mqtt_ha_enable">Home Assistant</label>
+          <input
+            name="mqtt_ha_enable"
+            type="checkbox"
+            role="switch"
+            id="cfg_mqtt_ha_enable" />
+        </div>
+        <br />
+        <label for="mqtt_server" data-i18n="server"></label>
+        <input
+          type="url"
+          data-type="ip"
+          oninput="validateIP(this)"
+          id="cfg_mqtt_server"
+          name="mqtt_server" />
+        <label for="mqtt_port" data-i18n="port"></label>
+        <input type="text" id="cfg_mqtt_port" name="mqtt_port" />
+        <label for="mqtt_topic" data-i18n="topic"></label>
+        <input type="text" id="cfg_mqtt_topic" name="mqtt_topic" />
+        <label for="mqtt_user" data-i18n="user"></label>
+        <input type="text" id="cfg_mqtt_user" name="mqtt_user" />
+        <label for="mqtt_password" data-i18n="password"></label>
+        <input type="password" id="cfg_mqtt_password" name="mqtt_password" />
+        <label for="mqtt_ha_topic">Home Assistant Topic</label>
+        <input
+          type="text"
+          id="cfg_mqtt_ha_topic"
+          placeholder="homeassistant"
+          name="mqtt_ha_topic" />
+        <label for="mqtt_ha_device">Home Assistant Device Name</label>
+        <input
+          type="text"
+          id="cfg_mqtt_ha_device"
+          placeholder="EspWebUI"
+          name="mqtt_ha_device" />
+      </details>
+      <hr />
+
+      <!-- Language -->
+      <details>
+        <summary data-i18n="language"></summary>
+        <select id="cfg_lang">
+          <option value="0" data-i18n="german"></option>
+          <option value="1" data-i18n="english"></option>
+        </select>
+      </details>
+      <hr />
+      <!-- Buttons -->
+      <button
+        id="p12_btn_restart"
+        data-i18n="restart"
+        onclick="restartFunction()"
+        style="width: 100%; margin-bottom: 10px"></button>
+      <br />
+      <br />
+    </div>
+  </div>
+</div>
+</main>
+      <footer>
+        <div
+          id="connectionLostBar"
+          class="footerBar"
+          style="display: none; background-color: #732e2e">
+          <div data-i18n="lost_connection"></div>
+          <button
+            id="p99_reloadButton"
+            class="svg i_auto"
+            style="width: 50px"></button>
+        </div>
+      </footer>
+    </section>
+  </body>
+</html>
